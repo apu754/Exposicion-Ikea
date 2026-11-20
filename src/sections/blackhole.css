@@ -1,0 +1,98 @@
+/* Agujero negro hecho solo con CSS.
+   Capas: brillo → disco de atrás → anillo de lente (la parte de atrás del disco
+   curvada por la gravedad) → horizonte de eventos → anillo de fotones → disco de adelante. */
+.blackhole {
+  --bh: min(560px, 44vw);
+  position: relative;
+  width: var(--bh); aspect-ratio: 1;
+  padding: 0; border: 0; border-radius: 50%;
+  background: none;
+  cursor: pointer;
+  transition: scale .6s var(--ease);
+}
+.blackhole:hover { scale: 1.03; }
+.blackhole:focus-visible { outline-offset: -10%; }
+.blackhole > span {
+  position: absolute; left: 50%; top: 50%;
+  translate: -50% -50%;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* halo cálido alrededor */
+.bh-glow {
+  width: 150%; height: 150%;
+  background: radial-gradient(closest-side, rgba(255, 170, 120, .32), rgba(255, 93, 143, .12) 45%, transparent 75%);
+  filter: blur(10px);
+  opacity: .8;
+  transition: opacity .6s;
+  animation: breathe 6s ease-in-out infinite alternate;
+}
+.blackhole:hover .bh-glow { opacity: 1; }
+@keyframes breathe { to { scale: 1.08; } }
+
+/* disco de acreción: un anillo plano inclinado en 3D que gira */
+.bh-disk {
+  width: 100%; height: 100%;
+  transform: perspective(900px) rotateX(80deg);
+}
+.bh-disk i {
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  background:
+    repeating-conic-gradient(from 0deg, rgba(255, 255, 255, .22) 0deg 1.5deg, transparent 1.5deg 6deg),
+    radial-gradient(closest-side, transparent 0 38%, rgba(255, 248, 236, .98) 40%, #ffd08a 44%, #ff9a4a 52%, #e8463a 64%, rgba(160, 20, 50, .5) 78%, transparent 100%);
+  -webkit-mask: radial-gradient(closest-side, transparent 0 38%, #000 40%, #000 80%, transparent 100%);
+  mask: radial-gradient(closest-side, transparent 0 38%, #000 40%, #000 80%, transparent 100%);
+  filter: blur(.6px);
+  animation: bh-spin 9s linear infinite;
+}
+/* efecto Doppler: el lado que viene hacia nosotros brilla más */
+.bh-disk::after {
+  content: ""; position: absolute; inset: 0; border-radius: 50%;
+  background: linear-gradient(90deg, rgba(255, 252, 245, .6), transparent 55%);
+  -webkit-mask: radial-gradient(closest-side, transparent 0 38%, #000 41%, #000 70%, transparent 100%);
+  mask: radial-gradient(closest-side, transparent 0 38%, #000 41%, #000 70%, transparent 100%);
+  mix-blend-mode: screen;
+}
+/* el disco de adelante es solo la mitad cercana: pasa por delante del horizonte */
+.bh-front { clip-path: inset(50% 0 0 0); }
+
+/* anillo de lente: la parte de atrás del disco, curvada por encima y por debajo */
+.bh-lens {
+  width: 54%; height: 54%;
+  background: radial-gradient(closest-side, transparent 0 70%, rgba(255, 246, 232, .95) 74%, #ffc27a 79%, #ff7a45 86%, rgba(214, 40, 57, .4) 93%, transparent 100%);
+  -webkit-mask: linear-gradient(#000 0 48%, rgba(0, 0, 0, .3) 60%, rgba(0, 0, 0, .55) 100%);
+  mask: linear-gradient(#000 0 48%, rgba(0, 0, 0, .3) 60%, rgba(0, 0, 0, .55) 100%);
+  filter: blur(.8px);
+  animation: shimmer 5s ease-in-out infinite alternate;
+}
+.bh-lens::after {
+  content: ""; position: absolute; inset: 0; border-radius: 50%;
+  background: linear-gradient(90deg, rgba(255, 255, 250, .45), transparent 60%);
+  -webkit-mask: radial-gradient(closest-side, transparent 0 72%, #000 76%, #000 90%, transparent 100%);
+  mask: radial-gradient(closest-side, transparent 0 72%, #000 76%, #000 90%, transparent 100%);
+  mix-blend-mode: screen;
+}
+@keyframes shimmer { to { filter: blur(.8px) brightness(1.18); } }
+
+/* horizonte de eventos: de aquí no sale ni la luz */
+.bh-horizon {
+  width: 38%; height: 38%;
+  background: #000;
+  box-shadow: 0 0 24px 10px #000;
+}
+
+/* anillo de fotones: luz atrapada en órbita justo en el borde */
+.bh-ring {
+  width: 39.4%; height: 39.4%;
+  box-shadow:
+    0 0 0 1.5px rgba(255, 238, 220, .9),
+    0 0 12px 2px rgba(255, 190, 140, .75),
+    inset 0 0 8px rgba(255, 190, 140, .45);
+}
+
+@media (max-width: 900px) {
+  .blackhole { --bh: min(88vw, 440px); }
+}
+@keyframes bh-spin { to { transform: rotate(360deg); } }
