@@ -6,6 +6,7 @@ import profesional from './profesional.js';
 import musica from './musica.js';
 import punk from './punk.js';
 import libre from './libre.js';
+import universo from './universo.js';
 import trayectoria from './trayectoria.js';
 import acciones from './acciones.js';
 import reposicion from './reposicion.js';
@@ -16,7 +17,7 @@ import diferencia from './diferencia.js';
 import gracias from './gracias.js';
 
 export const sections = [
-  hero, conoceme, manada, profesional, musica, punk, libre,
+  hero, conoceme, manada, profesional, musica, punk, libre, universo,
   trayectoria, acciones, reposicion, resultados,
   listo, cocina, diferencia, gracias,
 ];

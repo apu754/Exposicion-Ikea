@@ -48,6 +48,20 @@ export const cancionPunk = {
   audio: 'audio/pestes-mutantex.mp3', inicio: 0, duracion: 15,
 };
 
+// Sección de astronomía: un sistema solar con lo que más quiero.
+// radio = tamaño de la órbita (px) · tamano = tamaño del planeta (px) · vuelta = segundos por vuelta
+export const universo = {
+  frase: 'Así se ve mi universo.',
+  centro: 'JD',
+  planetas: [
+    { nombre: '🐾 Mascotas', radio: 105, tamano: 26, vuelta: 14, colores: ['#ffd1dc', '#ff5d8f'] },
+    { nombre: '🎸 Música', radio: 165, tamano: 34, vuelta: 22, colores: ['#ffb07a', '#d62839'], anillo: true },
+    { nombre: '🫂 Amigos', radio: 225, tamano: 24, vuelta: 31, colores: ['#ffe3c4', '#c0915f'] },
+    { nombre: '💻 Tecnología', radio: 285, tamano: 30, vuelta: 42, colores: ['#d4dcff', '#5b5bd6'] },
+    { nombre: '🛋️ IKEA', radio: 345, tamano: 22, vuelta: 56, colores: ['#e6fff7', '#2bb3a0'] },
+  ],
+};
+
 export const trayectoria = [
   { ver: 'v1.0', titulo: 'Fines de semana', texto: 'Donde empezó todo.', estado: 'hecho' },
   { ver: 'v2.0', titulo: 'Medio tiempo', texto: 'Trabajo y estudio, en equilibrio.', estado: 'hecho' },
