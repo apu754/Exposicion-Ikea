@@ -1,3 +1,5 @@
+import { getVolume } from './volume.js';
+
 // Reproduce unos segundos de cada canción, con entrada y salida suaves.
 // Suena una sola a la vez y se detiene si su sección sale de pantalla.
 // Emite 'clip:play' (con detail.mode) y 'clip:stop' para que las secciones reaccionen.
@@ -41,7 +43,7 @@ function loop() {
   if (!c) return;
   const t = c.audio.currentTime - c.start;
   c.btn.style.setProperty('--t', Math.min(1, Math.max(0, t / c.len)));
-  c.audio.volume = Math.min(1, Math.max(0, t / 0.6), Math.max(0, (c.len - t) / 1.5));
+  c.audio.volume = Math.min(1, Math.max(0, t / 0.6), Math.max(0, (c.len - t) / 1.5)) * getVolume();
   if (t >= c.len || c.audio.ended) return stop();
   c.raf = requestAnimationFrame(loop);
 }

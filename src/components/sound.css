@@ -1,0 +1,25 @@
+.nav-tools { display: flex; align-items: center; gap: 14px; }
+
+.sound { display: flex; align-items: center; gap: 6px; }
+.snd-btn {
+  display: grid; place-items: center;
+  width: 28px; height: 28px;
+  border: 0; background: var(--line);
+  font: 12px/1 var(--pixel);
+  cursor: pointer;
+  transition: background .2s;
+}
+.snd-btn:hover { background: var(--line-strong); }
+.snd-toggle { width: 34px; }
+.snd-toggle .i-off,
+.sound.muted .snd-toggle .i-on { display: none; }
+.sound.muted .snd-toggle .i-off { display: block; opacity: .6; }
+body.on-ink .snd-btn { background: rgba(255, 255, 255, .1); }
+body.on-ink .snd-btn:hover { background: rgba(255, 255, 255, .2); }
+
+/* barras de volumen por bloques */
+.snd-bars { display: flex; align-items: flex-end; gap: 2px; height: 16px; padding: 0 2px; }
+.snd-bars i { width: 4px; background: currentColor; opacity: .2; }
+.snd-bars i.on { opacity: 1; background: var(--red); }
+
+@media (max-width: 420px) { .snd-bars { display: none; } }

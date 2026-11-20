@@ -1,8 +1,10 @@
 import { reduced } from './motion.js';
 import { toggleTheme } from './theme.js';
+import { toggleMusic } from './ambient.js';
+import { getVolume, setVolume } from './volume.js';
 
 // Modo presentación: flechas / espacio / AvPág (o un clicker) pasan de sección,
-// F pone pantalla completa y T cambia el tema.
+// F pone pantalla completa, T cambia el tema, M prende/apaga la música y +/- el volumen.
 export function initPresenter(boot) {
   const slides = [...document.querySelectorAll('.slide')];
 
@@ -30,6 +32,9 @@ export function initPresenter(boot) {
       return;
     }
     if (key === 't') return toggleTheme();
+    if (key === 'm') return toggleMusic();
+    if (key === '+' || key === '=') return setVolume(getVolume() + 0.1);
+    if (key === '-') return setVolume(getVolume() - 0.1);
 
     const next = ['ArrowDown', 'ArrowRight', 'PageDown'].includes(e.key) || (e.key === ' ' && !e.shiftKey);
     const prev = ['ArrowUp', 'ArrowLeft', 'PageUp'].includes(e.key) || (e.key === ' ' && e.shiftKey);

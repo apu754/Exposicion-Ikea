@@ -17,6 +17,7 @@ import { initPresenter } from './core/presenter.js';
 import { initTilt } from './core/tilt.js';
 import { createStarfield } from './core/starfield.js';
 import { initPixelCursor } from './core/pixelCursor.js';
+import { initAmbient } from './core/ambient.js';
 
 const app = document.getElementById('app');
 app.innerHTML = sections.map(s => s.render()).join('');
@@ -24,6 +25,7 @@ renderNav(document.getElementById('topnav'));
 
 const boot = initBoot();
 initTheme();
+initAmbient();
 initPixelCursor();
 initPhotos(app);
 sections.forEach(s => s.init?.(document.getElementById(s.id)));
