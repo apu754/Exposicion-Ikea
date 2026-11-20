@@ -22,6 +22,7 @@
   --code-bar: #26151a;
   --sun: none;
   --moon: block;
+  --hero-sky: 0;
 
   --grad: linear-gradient(90deg, var(--red), var(--pink) 55%, var(--peach));
   --radius: 28px;
@@ -51,6 +52,7 @@
     --shadow: 0 1px 0 var(--line), 0 24px 48px -28px rgba(0, 0, 0, .7);
     --sun: block;
     --moon: none;
+    --hero-sky: 1;
   }
 }
 :root[data-theme="dark"] {
@@ -71,6 +73,7 @@
   --shadow: 0 1px 0 var(--line), 0 24px 48px -28px rgba(0, 0, 0, .7);
   --sun: block;
   --moon: none;
+  --hero-sky: 1;
 }
 
 /* ---------- Base ---------- */
