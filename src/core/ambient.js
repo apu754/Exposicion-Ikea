@@ -1,16 +1,31 @@
 import { getVolume, onVolume } from './volume.js';
 
-// Música espacial relajante generada en vivo con Web Audio (no usa archivos):
-// un acorde suave con mucha reverberación y campanitas sueltas de vez en cuando.
-// Se apaga sola mientras suena una canción (eventos clip:play / clip:stop).
+// Música de fondo generada en vivo con Web Audio (no usa archivos), al estilo de los
+// soundtracks tranquilos de videojuegos tipo Minecraft: piano suave, acordes lentos
+// con séptimas y novenas, melodías sueltas que van y vienen, y silencios entre frases.
+// Nunca se repite igual. Se apaga sola mientras suena una canción (clip:play / clip:stop).
 
-const LEVEL = 0.45;                                           // respecto al volumen general
-const CHORD = [110, 164.81, 220, 246.94, 261.63, 329.63];     // La menor con novena
-const BELLS = [523.25, 587.33, 659.25, 783.99, 880, 1046.5];  // escala pentatónica
+const LEVEL = 0.5;                 // respecto al volumen general
+const BEAT = 60 / 66;              // 66 pulsos por minuto: lento
+const CHORD_BEATS = 8;             // cada acorde dura dos compases
 
-let ctx = null, music, sfx, reverb;
+// Notas MIDI (60 = Do central). Progresión suave en Do mayor.
+const PROGRESSION = [
+  { bass: 41, chord: [53, 57, 60, 64] },   // Fa maj7
+  { bass: 36, chord: [52, 55, 59, 62] },   // Do maj9
+  { bass: 45, chord: [52, 55, 60, 64] },   // La m7
+  { bass: 43, chord: [50, 55, 59, 64] },   // Sol 6
+  { bass: 41, chord: [53, 57, 60, 67] },   // Fa add9
+  { bass: 40, chord: [52, 55, 59, 64] },   // Mi m7
+  { bass: 38, chord: [50, 57, 60, 65] },   // Re m7
+  { bass: 43, chord: [50, 55, 60, 62] },   // Sol sus
+];
+const MELODY = [72, 74, 76, 79, 81, 84, 86, 88];  // pentatónica de Do, octava alta
+
+let ctx = null, music, sfx, dry, reverb;
 let on = (() => { try { return localStorage.getItem('musica') !== 'off'; } catch { return true; } })();
 let ducked = false;
+let nextChordAt = 0, chordIndex = 0, melodyStep = 3;
 const listeners = new Set();
 
 export const isMusicOn = () => on;
@@ -54,77 +69,116 @@ function update() {
 
 function build() {
   ctx = new AudioContext();
+  // el compresor empareja el volumen y evita que se sature cuando coinciden varias notas
+  const glue = ctx.createDynamicsCompressor();
+  glue.threshold.value = -18;
+  glue.ratio.value = 3;
+  glue.connect(ctx.destination);
   music = ctx.createGain();
   music.gain.value = 0;
-  music.connect(ctx.destination);
+  music.connect(glue);
   sfx = ctx.createGain();
   sfx.connect(ctx.destination);
 
-  // reverberación larga, como un espacio enorme
+  // sala mediana: el piano suena cercano pero con aire
+  dry = ctx.createGain();
+  dry.gain.value = 0.8;
+  dry.connect(music);
   reverb = ctx.createConvolver();
-  reverb.buffer = impulse(5, 2.8);
+  reverb.buffer = impulse(3.2, 3);
   const wet = ctx.createGain();
-  wet.gain.value = 0.7;
+  wet.gain.value = 0.45;
   reverb.connect(wet).connect(music);
 
-  // colchón: dos osciladores un poco desafinados por nota, filtrados y con vaivén lento
-  const filter = ctx.createBiquadFilter();
-  filter.type = 'lowpass';
-  filter.frequency.value = 800;
-  filter.Q.value = 0.6;
-  lfo(0.03, 350).connect(filter.frequency);
-  filter.connect(music);
-  filter.connect(reverb);
+  // programa las notas con un poco de anticipación para que el ritmo sea exacto
+  nextChordAt = ctx.currentTime + 0.2;
+  setInterval(schedule, 250);
+}
 
-  CHORD.forEach((freq, i) => {
-    const voice = ctx.createGain();
-    voice.gain.value = 0.045;
-    lfo(0.05 + i * 0.013, 0.025).connect(voice.gain);
-    voice.connect(filter);
-    [-6, 6].forEach((cents, k) => {
-      const o = ctx.createOscillator();
-      o.type = k ? 'triangle' : 'sine';
-      o.frequency.value = freq;
-      o.detune.value = cents;
-      o.connect(voice);
-      o.start();
-    });
+function schedule() {
+  if (ctx.state !== 'running') return;
+  // si el audio estuvo pausado, retoma desde ahora en vez de ponerse al día
+  if (nextChordAt < ctx.currentTime) nextChordAt = ctx.currentTime + 0.1;
+  while (nextChordAt < ctx.currentTime + 1.5) {
+    playChord(nextChordAt, PROGRESSION[chordIndex % PROGRESSION.length]);
+    nextChordAt += BEAT * CHORD_BEATS;
+    chordIndex++;
+  }
+}
+
+function playChord(t, { bass, chord }) {
+  const len = BEAT * CHORD_BEATS;
+  piano(bass, t, 0.38);
+  pad(chord, t, len);
+
+  // arpegio lento hacia arriba, a veces con notas omitidas
+  const spacing = [1, 1.5, 2][(Math.random() * 3) | 0];
+  chord.forEach((n, i) => {
+    if (i > 0 && Math.random() < 0.2) return;
+    piano(n, t + i * spacing * BEAT, 0.2);
   });
 
-  const ring = () => {
-    if (on && !ducked && ctx.state === 'running') bell();
-    setTimeout(ring, 2500 + Math.random() * 4000);
-  };
-  ring();
+  // la melodía aparece en algunos acordes y en otros se deja respirar
+  if (Math.random() < 0.65) {
+    const count = 2 + ((Math.random() * 4) | 0);
+    const beats = new Set();
+    while (beats.size < count) beats.add(2 + Math.floor(Math.random() * 11) / 2);
+    [...beats].sort((a, b) => a - b).forEach(b => {
+      melodyStep = Math.max(0, Math.min(MELODY.length - 1, melodyStep + [-2, -1, -1, 1, 1, 2][(Math.random() * 6) | 0]));
+      piano(MELODY[melodyStep], t + b * BEAT, 0.27 + Math.random() * 0.09);
+    });
+  }
+  // de vez en cuando, una nota grave más que resuena al final
+  if (Math.random() < 0.3) piano(bass + 12, t + (len - BEAT * 2), 0.18);
 }
 
-function lfo(freq, depth) {
-  const o = ctx.createOscillator();
-  o.frequency.value = freq;
-  const g = ctx.createGain();
-  g.gain.value = depth;
-  o.connect(g);
-  o.start();
-  return g;
-}
-
-function bell() {
-  const t = ctx.currentTime;
-  const freq = BELLS[(Math.random() * BELLS.length) | 0];
+// Nota de piano suave: armónicos que se apagan, y un filtro que oscurece el sonido tras el golpe.
+function piano(midi, t, vel) {
+  const f = 440 * 2 ** ((midi - 69) / 12);
+  const dur = 2.6 + (84 - midi) * 0.07;           // las graves duran más
   const env = ctx.createGain();
-  env.gain.setValueAtTime(0, t);
-  env.gain.linearRampToValueAtTime(0.05, t + 0.02);
-  env.gain.exponentialRampToValueAtTime(0.0001, t + 4);
+  env.gain.setValueAtTime(0.0001, t);
+  env.gain.exponentialRampToValueAtTime(vel, t + 0.01);
+  env.gain.exponentialRampToValueAtTime(vel * 0.35, t + 0.4);
+  env.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+  const tone = ctx.createBiquadFilter();
+  tone.type = 'lowpass';
+  tone.frequency.setValueAtTime(Math.min(f * 5, 3500), t);
+  tone.frequency.exponentialRampToValueAtTime(Math.max(f * 1.4, 280), t + 1);
+  tone.connect(env);
+  env.connect(dry);
   env.connect(reverb);
-  env.connect(music);
-  [1, 2.01].forEach((mult, i) => {
+  [[1, 1], [2, 0.32], [3, 0.1], [4.01, 0.04]].forEach(([harmonic, gain]) => {
     const o = ctx.createOscillator();
-    o.frequency.value = freq * mult;
+    o.frequency.value = f * harmonic;
+    o.detune.value = (Math.random() - 0.5) * 4;
     const g = ctx.createGain();
-    g.gain.value = i ? 0.3 : 1;
-    o.connect(g).connect(env);
+    g.gain.value = gain;
+    o.connect(g).connect(tone);
     o.start(t);
-    o.stop(t + 4.1);
+    o.stop(t + dur + 0.1);
+  });
+}
+
+// Colchón muy bajito debajo del piano, que entra y sale despacio.
+function pad(notes, t, len) {
+  const env = ctx.createGain();
+  env.gain.setValueAtTime(0.0001, t);
+  env.gain.exponentialRampToValueAtTime(0.035, t + 2);
+  env.gain.setValueAtTime(0.035, t + len - 1);
+  env.gain.exponentialRampToValueAtTime(0.0001, t + len + 1.5);
+  const soft = ctx.createBiquadFilter();
+  soft.type = 'lowpass';
+  soft.frequency.value = 900;
+  soft.connect(env);
+  env.connect(reverb);
+  notes.forEach(n => {
+    const o = ctx.createOscillator();
+    o.type = 'triangle';
+    o.frequency.value = 440 * 2 ** ((n - 69) / 12);
+    o.connect(soft);
+    o.start(t);
+    o.stop(t + len + 1.6);
   });
 }
 
