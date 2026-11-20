@@ -56,13 +56,12 @@ export function createStarfield(host, { density = 1, speed = 1, shooting = true 
         Object.assign(s, newStar(1));
         continue;
       }
+      // estrellas cuadradas y alineadas a la cuadrícula: un toque pixel art
       const depth = 1 - s.z;
-      const r = 0.3 + s.s * depth * 1.8;
+      const size = Math.max(1, Math.round(s.s * depth * 3.2));
       const alpha = Math.min(1, depth * 1.5 + 0.15) * (0.65 + 0.35 * Math.sin(s.t));
       ctx.fillStyle = `rgba(${s.c},${alpha})`;
-      ctx.beginPath();
-      ctx.arc(sx, sy, r, 0, Math.PI * 2);
-      ctx.fill();
+      ctx.fillRect(Math.round(sx), Math.round(sy), size, size);
     }
 
     if (shooting && running) drawShootingStar();

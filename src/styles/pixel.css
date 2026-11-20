@@ -1,0 +1,43 @@
+/* Toque pixel art / videojuegos: fuente pixel en etiquetas pequeñas, bloques y sprites */
+:root { --pixel: "Press Start 2P", var(--mono); }
+
+.pixel { font-family: var(--pixel); font-size: 11px; line-height: 1.8; letter-spacing: .02em; text-transform: uppercase; }
+.eyebrow {
+  font-family: var(--pixel);
+  font-size: clamp(10px, .95vw, 13px);
+  line-height: 1.8; letter-spacing: .03em; text-transform: uppercase;
+  margin-bottom: 20px;
+}
+.kicker { font-family: var(--pixel); font-size: 10px; letter-spacing: .02em; }
+.brand { font-family: var(--pixel); font-size: 14px !important; }
+.hint { font-family: var(--pixel); font-size: 9px; }
+.dots button::before { font-family: var(--pixel); font-size: 9px; text-transform: uppercase; }
+.boot pre { font-family: var(--pixel); font-size: clamp(8px, 1.6vw, 12px); line-height: 2.4; }
+
+.blink { animation: blink-step 1.1s steps(1) infinite; }
+@keyframes blink-step { 50% { opacity: 0; } }
+
+.pixel-art { display: block; image-rendering: pixelated; }
+
+/* invasor de dos cuadros */
+.invader { position: relative; display: inline-block; }
+.invader svg:last-child { position: absolute; inset: 0; animation: frame 1s steps(1) infinite; }
+.invader svg:first-child { animation: frame 1s steps(1) infinite reverse; }
+@keyframes frame { 50% { opacity: 0; } }
+
+/* esquinas en escalón, como un botón de juego viejo */
+.chip, .pixel-box {
+  border-radius: 0 !important;
+  clip-path: polygon(
+    0 4px, 4px 4px, 4px 0, calc(100% - 4px) 0, calc(100% - 4px) 4px, 100% 4px,
+    100% calc(100% - 4px), calc(100% - 4px) calc(100% - 4px), calc(100% - 4px) 100%,
+    4px 100%, 4px calc(100% - 4px), 0 calc(100% - 4px)
+  );
+}
+
+/* barra de progreso por bloques */
+.progress { height: 5px; }
+.progress span {
+  -webkit-mask: repeating-linear-gradient(90deg, #000 0 10px, transparent 10px 12px);
+  mask: repeating-linear-gradient(90deg, #000 0 10px, transparent 10px 12px);
+}

@@ -2,6 +2,8 @@ import './styles/base.css';
 import './styles/layout.css';
 import './styles/chrome.css';
 import './components/components.css';
+import '@fontsource/press-start-2p/400.css';
+import './styles/pixel.css';
 
 import { sections } from './sections/index.js';
 import { renderNav } from './components/nav.js';
@@ -14,6 +16,7 @@ import { initScroll } from './core/scroll.js';
 import { initPresenter } from './core/presenter.js';
 import { initTilt } from './core/tilt.js';
 import { createStarfield } from './core/starfield.js';
+import { initPixelCursor } from './core/pixelCursor.js';
 
 const app = document.getElementById('app');
 app.innerHTML = sections.map(s => s.render()).join('');
@@ -21,6 +24,7 @@ renderNav(document.getElementById('topnav'));
 
 const boot = initBoot();
 initTheme();
+initPixelCursor();
 initPhotos(app);
 sections.forEach(s => s.init?.(document.getElementById(s.id)));
 // las secciones oscuras que no tienen su propio cielo reciben uno más tenue

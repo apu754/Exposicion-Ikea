@@ -12,15 +12,16 @@ export default {
       <h2 class="h-lg reveal">Crecer dentro<br>de <span class="grad">IKEA.</span></h2>
 
       <ol class="timeline reveal">
-        ${trayectoria.map(p => `
+        ${trayectoria.map((p, i) => `
           <li class="step ${p.estado}">
             <span class="dot"></span>
-            <span class="ver">${p.ver}${p.estado === 'siguiente' ? ' · próximamente' : ''}${p.estado === 'meta' ? ' · la meta' : ''}</span>
+            <span class="ver">LVL ${i + 1}${p.estado === 'siguiente' ? ' · next' : ''}${p.estado === 'meta' ? ' · boss' : ''}</span>
             <b>${p.titulo}</b>
             <small>${p.texto}</small>
           </li>`).join('')}
       </ol>
 
+      <p class="pixel next-level reveal">★ Next level</p>
       <p class="meta-line reveal">Mi meta: <b class="grad">${meta}</b></p>
     </div>`),
 };

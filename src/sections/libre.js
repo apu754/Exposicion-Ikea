@@ -1,5 +1,6 @@
 import { section } from '../components/section.js';
 import { photo } from '../components/photo.js';
+import { pixelArt, sprites, invader } from '../components/pixel.js';
 import { fotos } from '../data/contenido.js';
 import './libre.css';
 
@@ -29,7 +30,7 @@ export default {
     <div class="wrap">
       <p class="eyebrow reveal">Tiempo libre</p>
       <h2 class="h-lg reveal">Lo que disfruto.</h2>
-      <div class="grid cols-2" data-stagger>
+      <div class="grid cols-3" data-stagger>
         <article class="tile reveal" data-tilt="glare">
           ${photo({ src: fotos.amigos, label: 'Tú con tus amigos' })}
           <div class="tile-body"><h3>Mis amigos</h3><p>Los de siempre.</p></div>
@@ -37,6 +38,14 @@ export default {
         <article class="tile karaoke reveal" data-tilt="glare">
           ${mic}
           <div class="tile-body"><h3>Karaoke</h3><p>Con mis amigos, cualquier noche.</p></div>
+        </article>
+        <article class="tile games reveal" data-tilt="glare">
+          <div class="games-screen">
+            <div class="games-row">${invader('#ff7eaa', 5)}${invader('#ffb07a', 5)}${invader('#ff7eaa', 5)}</div>
+            ${pixelArt(sprites.controller, { x: '#fbefe9', d: '#2b1a17', o: '#ff4d5e' }, { size: 6, className: 'pad' })}
+            <p class="pixel blink">Press start</p>
+          </div>
+          <div class="tile-body"><h3>Videojuegos</h3><p>Fanático desde siempre.</p></div>
         </article>
       </div>
     </div>`),

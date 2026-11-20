@@ -59,6 +59,7 @@ export const universo = {
     { nombre: '🫂 Amigos', radio: 225, tamano: 24, vuelta: 31, colores: ['#ffe3c4', '#c0915f'] },
     { nombre: '💻 Tecnología', radio: 285, tamano: 30, vuelta: 42, colores: ['#d4dcff', '#5b5bd6'] },
     { nombre: '🛋️ IKEA', radio: 345, tamano: 22, vuelta: 56, colores: ['#e6fff7', '#2bb3a0'] },
+    { nombre: '🎮 Videojuegos', radio: 400, tamano: 20, vuelta: 70, colores: ['#f0d4ff', '#9b4dff'] },
   ],
 };
 
