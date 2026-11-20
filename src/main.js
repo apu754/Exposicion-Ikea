@@ -12,6 +12,7 @@ import { initClips } from './core/audioClips.js';
 import { initReveal } from './core/reveal.js';
 import { initScroll } from './core/scroll.js';
 import { initPresenter } from './core/presenter.js';
+import { initTilt } from './core/tilt.js';
 
 const app = document.getElementById('app');
 app.innerHTML = sections.map(s => s.render()).join('');
@@ -23,6 +24,7 @@ initPhotos(app);
 sections.forEach(s => s.init?.(document.getElementById(s.id)));
 initClips(app);
 initReveal(app);
+initTilt(app);
 initScroll();
 initPresenter(boot);
 

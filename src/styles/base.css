@@ -113,16 +113,16 @@ button { font: inherit; color: inherit; }
 .ok { color: #30d158; }
 
 /* ---------- Animación de entrada ---------- */
+/* usa `translate` (no `transform`) para poder combinarse con la inclinación 3D de core/tilt.js */
 .js .reveal {
   opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 1s var(--ease), transform 1.1s var(--ease);
-  transition-delay: var(--d, 0s);
+  translate: 0 40px;
+  transition: opacity 1s var(--ease) var(--d, 0s), translate 1.1s var(--ease) var(--d, 0s);
 }
-.js .reveal.in { opacity: 1; transform: none; }
+.js .reveal.in { opacity: 1; translate: none; }
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .js .reveal { opacity: 1; transform: none; transition: none; }
+  .js .reveal { opacity: 1; translate: none; transition: none; }
   *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
 }

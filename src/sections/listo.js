@@ -40,6 +40,6 @@ export default {
           ${aportes.map(([b, t]) => `<li class="reveal"><b>${b}</b>${t.startsWith(':') ? '' : ' '}${t}</li>`).join('')}
         </ul>
       </div>
-      <div class="reveal" style="--d:.2s">${codeWindow({ title: 'candidato.js', code, className: 'editor' })}</div>
+      <div class="reveal" style="--d:.2s" data-tilt>${codeWindow({ title: 'candidato.js', code, className: 'editor' })}</div>
     </div>`),
 };

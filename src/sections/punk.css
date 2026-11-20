@@ -33,7 +33,7 @@
   position: relative;
   padding: 44px 28px 28px;
   background: #140608; color: #fff6f0;
-  transform: rotate(-2.5deg);
+  rotate: -2.5deg;
   box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .5);
   --surface: #241014;
   --red: #ff7eaa;

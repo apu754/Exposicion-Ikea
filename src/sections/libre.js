@@ -30,11 +30,11 @@ export default {
       <p class="eyebrow reveal">Tiempo libre</p>
       <h2 class="h-lg reveal">Lo que disfruto.</h2>
       <div class="grid cols-2" data-stagger>
-        <article class="tile reveal">
+        <article class="tile reveal" data-tilt="glare">
           ${photo({ src: fotos.amigos, label: 'Tú con tus amigos' })}
           <div class="tile-body"><h3>Mis amigos</h3><p>Los de siempre.</p></div>
         </article>
-        <article class="tile karaoke reveal">
+        <article class="tile karaoke reveal" data-tilt="glare">
           ${mic}
           <div class="tile-body"><h3>Karaoke</h3><p>Con mis amigos, cualquier noche.</p></div>
         </article>

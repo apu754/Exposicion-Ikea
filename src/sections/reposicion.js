@@ -62,7 +62,7 @@ export default {
       <p class="lead reveal">${r.antes}</p>
 
       <div class="repo${reduced ? ' manual' : ''}">
-        <div class="phone reveal">
+        <div class="phone reveal" data-tilt>
           <div class="phone-screen">
             <div class="app-bar"><span>Reposición</span><small>HFB 10</small></div>
             ${screens.map((s, i) => `<div class="scr scr-${i}">${s}</div>`).join('')}
@@ -77,17 +77,17 @@ export default {
       </div>
 
       <div class="grid cols-3 repo-facts" data-stagger>
-        <article class="card reveal">
+        <article class="card reveal" data-tilt="glare">
           <span class="kicker">Regla clave</span>
           <h3>La IA lee. La persona decide.</h3>
           <p>Nada se guarda sin que alguien lo revise.</p>
         </article>
-        <article class="card reveal">
+        <article class="card reveal" data-tilt="glare">
           <span class="kicker">Alertas</span>
           <h3>Avisa antes del error.</h3>
           <div class="chips small">${r.alertas.map(a => `<span class="chip">${a}</span>`).join('')}</div>
         </article>
-        <article class="card reveal">
+        <article class="card reveal" data-tilt="glare">
           <span class="kicker">Futuro</span>
           <h3>Aprende con cada hoja.</h3>
           <p>Cada hoja guardada es un dato para entrenar un modelo propio.</p>

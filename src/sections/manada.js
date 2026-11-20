@@ -14,7 +14,7 @@ export default {
       <p class="lead reveal">Dos perros, un gato de tres meses<br>y pelos en toda la ropa.</p>
       <div class="grid pets" data-stagger>
         ${mascotas.map(m => `
-          <figure class="pet reveal">
+          <figure class="pet reveal" data-tilt>
             ${photo({
               src: m.foto,
               label: m.tipo.split(' ')[0],
