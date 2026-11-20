@@ -1,4 +1,9 @@
-.stat { min-height: 300px; justify-content: space-between; box-shadow: none; }
-.stat .ico { color: var(--pink); }
-.stat .big { display: inline-block; font-size: clamp(32px, 3.4vw, 50px); font-weight: 700; letter-spacing: -.035em; line-height: 1.1; }
+/* el tamaño del título depende del ancho de la tarjeta, así "Reconocimiento." siempre cabe */
+.stat { min-height: 300px; justify-content: flex-start; box-shadow: none; container-type: inline-size; }
+.stat .ico { color: var(--pink); margin-bottom: clamp(40px, 6vw, 72px); }
+.stat .big {
+  display: inline-block;
+  font-size: clamp(26px, 12cqi, 50px);
+  font-weight: 700; letter-spacing: -.035em; line-height: 1.1;
+}
 .stat p { margin-top: 10px; font-size: 18px; }
