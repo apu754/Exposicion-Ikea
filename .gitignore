@@ -3,3 +3,6 @@ dist/
 
 # canciones con derechos de autor: se quedan solo en tu computador
 public/audio/*.mp3
+
+# Netlify CLI
+.netlify/

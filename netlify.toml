@@ -1,0 +1,7 @@
+# Configuración para Netlify: compila con Vite y publica la carpeta dist/
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "22"
