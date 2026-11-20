@@ -18,6 +18,7 @@ import { initTilt } from './core/tilt.js';
 import { createStarfield } from './core/starfield.js';
 import { initPixelCursor } from './core/pixelCursor.js';
 import { initAmbient } from './core/ambient.js';
+import { initLightbox } from './core/lightbox.js';
 
 const app = document.getElementById('app');
 app.innerHTML = sections.map(s => s.render()).join('');
@@ -28,6 +29,7 @@ initTheme();
 initAmbient();
 initPixelCursor();
 initPhotos(app);
+initLightbox(app);
 sections.forEach(s => s.init?.(document.getElementById(s.id)));
 // las secciones oscuras que no tienen su propio cielo reciben uno más tenue
 app.querySelectorAll('.ink:not(.has-sky)').forEach(el => createStarfield(el, { density: 0.45, speed: 0.6, shooting: false }));

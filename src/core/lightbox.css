@@ -1,0 +1,54 @@
+/* ---------- Fotos: invitan a hacer clic ---------- */
+.photo { cursor: zoom-in; }
+.photo::before {
+  content: "▶ Ver";
+  position: absolute; top: 12px; right: 12px; z-index: 2;
+  padding: 7px 9px;
+  background: rgba(13, 5, 7, .75); color: #fbefe9;
+  font: 9px/1 var(--pixel); text-transform: uppercase;
+  opacity: 0; translate: 0 -4px;
+  transition: opacity .25s, translate .25s;
+  pointer-events: none;
+}
+.photo:hover::before, .photo:focus-visible::before { opacity: 1; translate: none; }
+.photo-card .caption { pointer-events: none; }
+
+/* ---------- Foto en primer plano ---------- */
+html.lb-open { overflow: hidden; }
+.lightbox { position: fixed; inset: 0; z-index: 95; cursor: zoom-out; }
+
+/* el agujero negro que se abre y cubre la pantalla */
+.lb-veil {
+  position: fixed;
+  border-radius: 50%;
+  background: #050206;
+  box-shadow: 0 0 0 2px rgba(255, 236, 214, .9), 0 0 24px 6px rgba(255, 160, 110, .7), 0 0 70px 24px rgba(255, 93, 143, .35);
+  transform: translate(-50%, -50%) scale(0);
+}
+
+/* las piezas van fijas en pantalla (pisa la regla genérica de .has-sky) y en este orden:
+   agujero → estrellas → foto y texto */
+.lightbox > .lb-veil { position: fixed !important; z-index: 1 !important; }
+.lightbox > .sky { z-index: 2; opacity: 0; transition: opacity .6s; }
+.lightbox.shown > .sky { opacity: 1; }
+.lightbox > .lb-photo, .lightbox > .lb-caption { z-index: 3 !important; }
+
+.lb-photo {
+  position: fixed !important; left: 50%; top: 46%;
+  margin: 0;
+  transform: translate(-50%, -50%) scale(0);
+  border-radius: 20px;
+  box-shadow: 0 0 0 2px rgba(255, 236, 214, .5), 0 40px 120px -20px rgba(255, 93, 143, .45);
+  cursor: zoom-out;
+}
+.lb-photo::before { display: none; }
+.lb-photo img { object-fit: contain; background: #050206; }
+
+.lb-caption {
+  position: fixed !important; left: 0; right: 0; bottom: 5vh;
+  display: flex; flex-direction: column; align-items: center; gap: 10px;
+  color: #fbefe9; text-align: center;
+  opacity: 0; transition: opacity .4s;
+}
+.lb-caption span { font-size: 8px; color: #c9a9a3; }
+.lightbox.shown .lb-caption { opacity: 1; transition-delay: .5s; }
