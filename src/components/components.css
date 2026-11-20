@@ -4,8 +4,8 @@
   border-radius: var(--radius);
   background: var(--photo-bg);
 }
-.photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
-.photo.is-empty img { display: none; }
+.photo img, .photo video { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+.photo.is-empty img, .photo.is-empty video { display: none; }
 .photo.is-empty::after {
   content: "📷  " attr(data-label) "\A" attr(data-file);
   white-space: pre;

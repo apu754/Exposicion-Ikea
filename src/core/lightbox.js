@@ -1,5 +1,6 @@
 import { reduced } from './motion.js';
 import { createStarfield } from './starfield.js';
+import { getVolume } from './volume.js';
 import './lightbox.css';
 
 // Al hacer clic en una foto (.photo): cae en espiral a un pequeño agujero negro, el agujero
@@ -43,9 +44,11 @@ async function show(ph) {
   const r = ph.getBoundingClientRect();
   const cx = r.left + r.width / 2;
   const cy = r.top + r.height / 2;
+  const vid = ph.querySelector('video');
   const img = ph.querySelector('img');
-  const loaded = !ph.classList.contains('is-empty') && img?.naturalWidth;
-  const ratio = loaded ? img.naturalWidth / img.naturalHeight : r.width / r.height;
+  const [mw, mh] = vid ? [vid.videoWidth, vid.videoHeight] : [img?.naturalWidth, img?.naturalHeight];
+  const loaded = !ph.classList.contains('is-empty') && mw;
+  const ratio = loaded ? mw / mh : r.width / r.height;
 
   // lo más grande que quepa en pantalla, sin deformar
   let w = innerWidth * 0.86;
@@ -80,6 +83,17 @@ async function show(ph) {
   createStarfield(box, { density: 1.2 });
   document.documentElement.classList.add('lb-open');
   box.addEventListener('click', hide);
+
+  // video: en grande suena, desde donde iba; la música de fondo se aparta mientras tanto
+  if (vid && loaded) {
+    const big = clone.querySelector('video');
+    big.currentTime = vid.currentTime;
+    big.muted = false;
+    big.volume = getVolume();
+    vid.pause();
+    big.play().catch(() => {});
+    big.dispatchEvent(new CustomEvent('clip:play', { bubbles: true, detail: { mode: 'video' } }));
+  }
 
   const cover = (Math.hypot(Math.max(cx, innerWidth - cx), Math.max(cy, innerHeight - cy)) * 2.2) / hole;
   const at = s => `translate(-50%, -50%) scale(${s})`;
@@ -124,6 +138,16 @@ async function hide() {
   const clone = box.querySelector('.lb-photo');
   const at = s => `translate(-50%, -50%) scale(${s})`;
   box.classList.remove('shown');
+
+  // video: se calla, vuelve la música y el de la página sigue desde donde iba
+  const big = clone.querySelector('video');
+  if (big && !big.paused) {
+    big.pause();
+    big.dispatchEvent(new CustomEvent('clip:stop', { bubbles: true }));
+    const small = ph.querySelector('video');
+    small.currentTime = big.currentTime;
+    small.play().catch(() => {});
+  }
 
   if (!reduced) {
     // la foto grande se hunde, el agujero se encoge hasta su sitio y la foto original vuelve a salir

@@ -78,8 +78,15 @@ Guárdalas con estos nombres y aparecen solas. Mientras falte una, la página mu
 | `perro-2.jpg` | Mi manada | Vertical 3:4 |
 | `gato.jpg` | Mi manada | Vertical 3:4 |
 | `yo-ikea.jpg` | IKEA, mi escuela | Horizontal o cuadrada |
-| `concierto.jpg` | Dato curioso (música) | Horizontal 4:3 |
 | `amigos.jpg` | Tiempo libre | Horizontal 4:3 |
+
+### Video → `public/video/`
+
+| Archivo | Dónde sale | Formato |
+|---|---|---|
+| `concierto.mp4` | Dato curioso (música) | Horizontal, MP4 |
+
+En la página se ve en silencio y en bucle; al hacerle clic se abre en grande con sonido.
 
 ### Canciones → `public/audio/`
 

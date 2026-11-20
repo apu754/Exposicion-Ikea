@@ -11,7 +11,7 @@ export const perfil = {
 export const fotos = {
   principal: 'img/yo-principal.jpg',
   ikea: 'img/yo-ikea.jpg',
-  concierto: 'img/concierto.jpg',
+  concierto: 'video/concierto.mp4',   // video: va en public/video/
   amigos: 'img/amigos.jpg',
 };
 

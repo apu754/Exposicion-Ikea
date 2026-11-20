@@ -42,7 +42,7 @@ html.lb-open { overflow: hidden; }
   cursor: zoom-out;
 }
 .lb-photo::before { display: none; }
-.lb-photo img { object-fit: contain; background: #050206; }
+.lb-photo img, .lb-photo video { object-fit: contain; background: #050206; }
 
 .lb-caption {
   position: fixed !important; left: 0; right: 0; bottom: 5vh;

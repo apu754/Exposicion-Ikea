@@ -1,5 +1,5 @@
 import { section } from '../components/section.js';
-import { photo } from '../components/photo.js';
+import { video } from '../components/photo.js';
 import { track } from '../components/track.js';
 import { fotos, bandas, canciones } from '../data/contenido.js';
 import { stop as stopClip } from '../core/audioClips.js';
@@ -32,7 +32,7 @@ export default {
     </div>
 
     <div class="wrap musica-bottom">
-      <div class="reveal">${photo({ src: fotos.concierto, label: 'Tú en un concierto' })}</div>
+      <div class="reveal">${video({ src: fotos.concierto, label: 'Tú en un concierto' })}</div>
       <div class="playlist reveal" style="--d:.15s">
         <div class="playlist-head">
           <h3>Suena así</h3>
