@@ -1,0 +1,30 @@
+.slide {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  padding: clamp(96px, 12vh, 140px) var(--gutter);
+  display: flex; flex-direction: column; justify-content: center;
+}
+.wrap { width: 100%; max-width: 1180px; margin: 0 auto; }
+
+/* Secciones oscuras: redefinen los colores y todo lo de adentro se adapta */
+.ink {
+  --bg: var(--ink-bg);
+  --surface: var(--ink-surface);
+  --surface-2: #3a1d25;
+  --fg: var(--ink-fg);
+  --muted: var(--ink-muted);
+  --line: rgba(255, 236, 228, .1);
+  --line-strong: rgba(255, 236, 228, .24);
+  --photo-bg: linear-gradient(135deg, #2a141a, #3a1c24);
+  background: var(--bg);
+  color: var(--fg);
+}
+
+/* Rejillas */
+.grid { display: grid; gap: clamp(14px, 1.6vw, 20px); margin-top: clamp(36px, 5vw, 56px); }
+.cols-auto { grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); }
+.cols-2 { grid-template-columns: repeat(2, 1fr); }
+.cols-3 { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 900px) { .cols-3 { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 640px) { .cols-2, .cols-3 { grid-template-columns: 1fr; } }

@@ -1,0 +1,9 @@
+.gracias { align-items: center; text-align: center; }
+.gracias .lead { margin-inline: auto; font-size: clamp(24px, 3vw, 40px); color: var(--fg); }
+.sig { margin-top: 48px; color: var(--muted); font-weight: 500; }
+.commit {
+  margin-top: 18px; padding: 10px 18px; border-radius: 12px;
+  background: var(--code-bg); color: #ffc2d1;
+  font: clamp(12px, 1.4vw, 14px) var(--mono);
+  max-width: 100%; overflow-wrap: anywhere;
+}

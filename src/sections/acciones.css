@@ -1,0 +1,5 @@
+.action { min-height: 280px; justify-content: space-between; }
+.action h3 { margin-top: auto; }
+.action.hl { background: var(--red); color: #fff; }
+.action.hl .kicker { color: #ffd1dc; }
+.action.hl p { color: rgba(255, 255, 255, .85); }

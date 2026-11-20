@@ -1,0 +1,23 @@
+.cocina { text-align: center; }
+.cocina .lead { margin-inline: auto; }
+.kitchen { width: min(980px, 100%); margin: clamp(40px, 6vw, 56px) auto 0; }
+.kitchen svg { width: 100%; height: auto; overflow: visible; }
+.kitchen .floor { fill: var(--line-strong); }
+.kitchen .cab { fill: var(--surface); stroke: var(--line-strong); stroke-width: 2; }
+.kitchen .cab.accent { fill: color-mix(in srgb, var(--pink) 22%, var(--surface)); }
+.kitchen .glass { fill: color-mix(in srgb, var(--pink) 12%, var(--surface)); }
+.kitchen .handle { fill: var(--fg); }
+.kitchen .split-line { stroke: var(--line-strong); stroke-width: 2; }
+.kitchen .hood > * { fill: var(--surface-2); stroke: var(--line-strong); }
+.kitchen .dim line { stroke: var(--red); stroke-width: 1.5; }
+.kitchen .dim rect { fill: var(--bg); }
+.kitchen .dim text { font: 600 13px var(--mono); fill: var(--red); text-anchor: middle; }
+.kitchen .k {
+  opacity: 0; transform: translateY(-36px);
+  transition: opacity .7s, transform .9s cubic-bezier(.2, .9, .3, 1.25);
+  transition-delay: calc(var(--i) * .13s);
+}
+.kitchen.in .k { opacity: 1; transform: none; }
+.cocina .chips { justify-content: center; margin-top: 40px; }
+
+@media (prefers-reduced-motion: reduce) { .kitchen .k { opacity: 1; transform: none; transition: none; } }

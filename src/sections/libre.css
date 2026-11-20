@@ -1,0 +1,17 @@
+.tile { display: flex; flex-direction: column; overflow: hidden; background: var(--surface); border-radius: var(--radius); box-shadow: var(--shadow); }
+.tile .photo { aspect-ratio: 4 / 3; border-radius: 0; }
+.tile:hover .photo img { transform: scale(1.05); }
+.tile-body { padding: 24px 28px 30px; }
+.tile h3 { font-size: 26px; letter-spacing: -.02em; }
+.tile p { color: var(--muted); font-size: 17px; }
+
+.karaoke {
+  justify-content: space-between;
+  background: var(--code-bg); color: #fbefe9;
+  --muted: #c9a9a3;
+}
+.mic { width: clamp(100px, 12vw, 140px); margin: clamp(32px, 5vw, 56px) auto 0; overflow: visible; color: #ffb3c6; }
+.mic .notes text { animation: float 2.4s ease-in-out infinite; }
+.mic .notes text:nth-child(2) { animation-delay: -.8s; }
+.mic .notes text:nth-child(3) { animation-delay: -1.6s; }
+@keyframes float { 50% { transform: translateY(-8px); opacity: .5; } }

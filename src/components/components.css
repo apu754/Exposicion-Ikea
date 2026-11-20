@@ -1,0 +1,109 @@
+/* ---------- Foto (con aviso si el archivo todavía no existe) ---------- */
+.photo {
+  position: relative; overflow: hidden;
+  border-radius: var(--radius);
+  background: var(--photo-bg);
+}
+.photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--ease); }
+.photo.is-empty img { display: none; }
+.photo.is-empty::after {
+  content: "📷  " attr(data-label) "\A" attr(data-file);
+  white-space: pre;
+  position: absolute; inset: 0;
+  display: grid; place-items: center; text-align: center;
+  padding: 20px;
+  font: 500 13px/1.7 var(--mono);
+  color: var(--muted);
+}
+.badge {
+  position: absolute; top: 14px; left: 14px; z-index: 1;
+  padding: 6px 12px; border-radius: 99px;
+  background: var(--red); color: #fff;
+  font-size: 13px; font-weight: 600;
+}
+
+/* ---------- Tarjeta ---------- */
+.card {
+  position: relative; overflow: hidden;
+  display: flex; flex-direction: column; gap: 8px;
+  padding: clamp(24px, 3vw, 34px);
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+.card h3 { font-size: clamp(22px, 2.2vw, 26px); letter-spacing: -.022em; line-height: 1.15; }
+.card p { color: var(--muted); font-size: 17px; }
+.kicker { font: 600 13px var(--mono); color: var(--red); letter-spacing: .04em; text-transform: uppercase; }
+.ico { width: 44px; height: 44px; color: var(--red); }
+
+/* ---------- Etiquetas ---------- */
+.chips { display: flex; flex-wrap: wrap; gap: 10px; }
+.chip {
+  padding: 9px 16px; border-radius: 99px;
+  background: var(--surface); border: 1px solid var(--line);
+  font-size: 15px; font-weight: 500;
+}
+.chip.hl { background: var(--red); border-color: transparent; color: #fff; }
+.chips.small .chip { padding: 6px 12px; font-size: 13px; }
+
+/* ---------- Ventana de código / terminal ---------- */
+.window {
+  overflow: hidden;
+  border-radius: 20px;
+  background: var(--code-bg); color: #f3e6e1;
+  border: 1px solid rgba(255, 255, 255, .06);
+  box-shadow: 0 50px 100px -40px rgba(60, 10, 20, .6);
+}
+.window-bar {
+  display: flex; align-items: center; gap: 8px;
+  padding: 14px 18px; background: var(--code-bar);
+  font: 13px var(--mono); color: #a8928d;
+}
+.window-bar i { width: 12px; height: 12px; border-radius: 50%; background: #ff5f57; }
+.window-bar i:nth-child(2) { background: #febc2e; }
+.window-bar i:nth-child(3) { background: #28c840; }
+.window-bar span { margin-left: 10px; }
+.window pre {
+  padding: clamp(18px, 2.4vw, 26px);
+  font: clamp(12px, 1.1vw, 16px)/1.75 var(--mono);
+  white-space: pre-wrap; word-break: break-word;
+  cursor: pointer;
+}
+.caret {
+  display: inline-block; width: .6em; height: 1.15em;
+  margin-left: 2px; vertical-align: text-bottom;
+  background: var(--pink);
+  animation: blink 1s steps(1) infinite;
+}
+@keyframes blink { 50% { opacity: 0; } }
+
+/* ---------- Clip de canción ---------- */
+.track {
+  display: flex; align-items: center; gap: 16px;
+  width: 100%; padding: 12px 18px 12px 12px;
+  border: 1px solid var(--line); border-radius: 20px;
+  background: var(--surface);
+  text-align: left; cursor: pointer;
+  transition: border-color .3s, transform .2s;
+}
+.track:hover { border-color: var(--line-strong); }
+.track:active { transform: scale(.98); }
+.track-play { position: relative; flex: none; display: grid; place-items: center; width: 46px; height: 46px; color: var(--red); }
+.track-play .ring { position: absolute; inset: 0; transform: rotate(-90deg); }
+.ring circle { fill: none; stroke: var(--line-strong); stroke-width: 2.5; }
+.ring .ring-fill { stroke: var(--red); stroke-dasharray: 1; stroke-dashoffset: calc(1 - var(--t, 0)); stroke-linecap: round; }
+.track-play svg:not(.ring) { width: 18px; height: 18px; }
+.i-pause, .playing .i-play { display: none; }
+.playing .i-pause { display: block; }
+.track-meta { flex: 1; min-width: 0; display: flex; flex-direction: column; }
+.track-meta b { font-size: 17px; letter-spacing: -.01em; }
+.track-meta small { font-size: 14px; color: var(--muted); }
+.track-missing { display: none; font: normal 12px var(--mono); color: var(--pink); }
+.missing .track-missing { display: block; }
+.track-bars { display: flex; align-items: flex-end; gap: 3px; height: 20px; }
+.track-bars i { width: 3px; height: 30%; border-radius: 2px; background: var(--red); opacity: .35; }
+.playing .track-bars i { opacity: 1; animation: bars .55s ease-in-out infinite alternate; }
+.playing .track-bars i:nth-child(2) { animation-delay: -.2s; }
+.playing .track-bars i:nth-child(3) { animation-delay: -.35s; }
+.playing .track-bars i:nth-child(4) { animation-delay: -.1s; }
+@keyframes bars { to { height: 100%; } }

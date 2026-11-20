@@ -1,0 +1,17 @@
+.split { display: grid; grid-template-columns: 1fr 1.2fr; gap: clamp(36px, 6vw, 64px); align-items: center; }
+.aportes { list-style: none; display: grid; gap: 16px; margin-top: 36px; }
+.aportes li { position: relative; padding-left: 30px; font-size: clamp(17px, 1.6vw, 20px); color: var(--muted); }
+.aportes li::before { content: "→"; position: absolute; left: 0; color: var(--red); font-weight: 700; }
+.aportes b { color: var(--fg); }
+
+.editor pre { min-height: 440px; }
+.tk-k { color: #ff7b8a; }
+.tk-s { color: #ffc2d1; }
+.tk-f { color: #ffb07a; }
+.tk-n { color: #ff9ecf; }
+.tk-c { color: #a8928d; }
+
+@media (max-width: 900px) {
+  .split { grid-template-columns: 1fr; }
+  .editor pre { min-height: 0; }
+}

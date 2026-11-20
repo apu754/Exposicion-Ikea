@@ -1,0 +1,12 @@
+.pets { grid-template-columns: repeat(3, 1fr); }
+.pet .photo { aspect-ratio: 3 / 4; }
+.pet:hover .photo img { transform: scale(1.05); }
+.pet figcaption { display: flex; flex-direction: column; margin-top: 14px; }
+.pet b { font-size: 22px; letter-spacing: -.02em; }
+.pet figcaption span { color: var(--muted); }
+
+@media (max-width: 640px) {
+  .pets { grid-template-columns: 1fr 1fr; }
+  .pet:last-child { grid-column: span 2; }
+  .pet:last-child .photo { aspect-ratio: 4 / 3; }
+}

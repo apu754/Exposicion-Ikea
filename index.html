@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Juan Diego · Planificador de cocinas</title>
+  <script>
+    // aplica el tema guardado antes de pintar, para que no parpadee
+    try { const t = localStorage.getItem('tema'); if (t) document.documentElement.dataset.theme = t; } catch (e) {}
+    document.documentElement.classList.add('js');
+  </script>
+</head>
+<body class="booting">
+  <div id="boot" class="boot" aria-hidden="true"><pre id="boot-text"></pre></div>
+  <div class="progress"><span id="progress-bar"></span></div>
+  <header id="topnav" class="topnav"></header>
+  <nav id="dots" class="dots" aria-label="Secciones"></nav>
+
+  <!-- Las secciones se arman desde src/sections/ -->
+  <main id="app"></main>
+
+  <div class="hint">← → navegar · F pantalla completa · T tema</div>
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>

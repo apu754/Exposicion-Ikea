@@ -1,0 +1,128 @@
+/* ---------- Colores (crema · rojo · rosado) ---------- */
+:root {
+  color-scheme: light;
+  --bg: #f6eee4;
+  --surface: #fffaf4;
+  --surface-2: #f0e4d6;
+  --fg: #2b1a17;
+  --muted: #7c6862;
+  --line: rgba(43, 26, 23, .1);
+  --line-strong: rgba(43, 26, 23, .22);
+  --red: #d62839;
+  --pink: #ff5d8f;
+  --peach: #ff9e7a;
+  --ink-bg: #1d0a10;
+  --ink-surface: #2b141b;
+  --ink-fg: #fbefe9;
+  --ink-muted: #c9a9a3;
+  --nav-bg: rgba(246, 238, 228, .75);
+  --photo-bg: linear-gradient(135deg, #efe1d1, #e2cfbb);
+  --shadow: 0 1px 0 var(--line), 0 24px 48px -28px rgba(90, 25, 35, .28);
+  --code-bg: #1a0e11;
+  --code-bar: #26151a;
+  --sun: none;
+  --moon: block;
+
+  --grad: linear-gradient(90deg, var(--red), var(--pink) 55%, var(--peach));
+  --radius: 28px;
+  --ease: cubic-bezier(.2, .7, .2, 1);
+  --gutter: clamp(20px, 6vw, 96px);
+  --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI Variable Display", "Segoe UI", Inter, Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: "SF Mono", "Cascadia Code", "JetBrains Mono", Consolas, monospace;
+}
+
+/* Modo oscuro: sigue al sistema, salvo que se elija otro con el botón */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    color-scheme: dark;
+    --bg: #130a0c;
+    --surface: #1e1215;
+    --surface-2: #28181c;
+    --fg: #f7ece6;
+    --muted: #b39c96;
+    --line: rgba(255, 236, 228, .09);
+    --line-strong: rgba(255, 236, 228, .2);
+    --red: #ff4d5e;
+    --pink: #ff7eaa;
+    --ink-bg: #070304;
+    --ink-surface: #1a0d11;
+    --nav-bg: rgba(19, 10, 12, .72);
+    --photo-bg: linear-gradient(135deg, #241518, #301d21);
+    --shadow: 0 1px 0 var(--line), 0 24px 48px -28px rgba(0, 0, 0, .7);
+    --sun: block;
+    --moon: none;
+  }
+}
+:root[data-theme="dark"] {
+  color-scheme: dark;
+  --bg: #130a0c;
+  --surface: #1e1215;
+  --surface-2: #28181c;
+  --fg: #f7ece6;
+  --muted: #b39c96;
+  --line: rgba(255, 236, 228, .09);
+  --line-strong: rgba(255, 236, 228, .2);
+  --red: #ff4d5e;
+  --pink: #ff7eaa;
+  --ink-bg: #070304;
+  --ink-surface: #1a0d11;
+  --nav-bg: rgba(19, 10, 12, .72);
+  --photo-bg: linear-gradient(135deg, #241518, #301d21);
+  --shadow: 0 1px 0 var(--line), 0 24px 48px -28px rgba(0, 0, 0, .7);
+  --sun: block;
+  --moon: none;
+}
+
+/* ---------- Base ---------- */
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font);
+  line-height: 1.4;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  transition: background .5s, color .5s;
+}
+body.booting { overflow: hidden; }
+img, svg { display: block; max-width: 100%; }
+button { font: inherit; color: inherit; }
+:focus-visible { outline: 2px solid var(--pink); outline-offset: 3px; }
+
+/* ---------- Tipografía ---------- */
+.eyebrow { font-size: clamp(15px, 1.5vw, 21px); font-weight: 600; color: var(--muted); margin-bottom: 14px; }
+.h-xl { font-size: clamp(44px, 9vw, 132px); font-weight: 700; letter-spacing: -.045em; line-height: 1.02; }
+.h-lg { font-size: clamp(36px, 6.2vw, 88px); font-weight: 700; letter-spacing: -.038em; line-height: 1.04; }
+.h-md { font-size: clamp(24px, 3.4vw, 48px); font-weight: 600; letter-spacing: -.025em; line-height: 1.12; }
+.lead {
+  margin-top: 22px; max-width: 34ch;
+  font-size: clamp(18px, 2vw, 28px); font-weight: 500; letter-spacing: -.012em;
+  color: var(--muted);
+}
+.grad {
+  background: var(--grad);
+  -webkit-background-clip: text; background-clip: text;
+  color: transparent;
+}
+/* que el degradado no corte las letras con cola (g, j, p) */
+.h-xl .grad, .h-lg .grad { padding-bottom: .1em; }
+.mono { font-family: var(--mono); font-size: 14px; }
+.small { font-size: 13px; }
+.muted { color: var(--muted); }
+.ok { color: #30d158; }
+
+/* ---------- Animación de entrada ---------- */
+.js .reveal {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 1s var(--ease), transform 1.1s var(--ease);
+  transition-delay: var(--d, 0s);
+}
+.js .reveal.in { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .reveal { opacity: 1; transform: none; transition: none; }
+  *, *::before, *::after { animation-duration: .01ms !important; animation-iteration-count: 1 !important; }
+}

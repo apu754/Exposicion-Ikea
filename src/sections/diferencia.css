@@ -1,0 +1,10 @@
+.diferencia .dim { margin-bottom: 6px; color: color-mix(in srgb, var(--fg) 32%, transparent); }
+.diferencia h2 { margin-top: 40px; }
+.terminal { max-width: 800px; margin-top: clamp(44px, 6vw, 64px); background: #0d0507; }
+.terminal pre { min-height: 280px; }
+.t-prompt { color: #ff7eaa; }
+.t-path { color: #ffb07a; }
+.t-hash { color: #ff4d5e; }
+.t-muted { color: #a8928d; }
+
+@media (max-width: 640px) { .terminal pre { min-height: 0; } }
