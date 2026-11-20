@@ -6,7 +6,7 @@ Guarda aquí las canciones en .mp3 con estos nombres:
 |-----------------------------|-------------------------------------------|
 | `territory.mp3`             | Territory — Sepultura                     |
 | `hasta-que-me-olvides.mp3`  | Hasta que me olvides — Luis Miguel        |
-| `pestes-mutantex.mp3`       | La canción que elijas de Pestes Mutantex  |
+| `sin-reaccion-mutantex.mp3` | Sin reacción — Pestes Mutantex            |
 
 Puede ser la canción completa: la página solo toca unos segundos.
 En `src/data/contenido.js` cambias para cada una:

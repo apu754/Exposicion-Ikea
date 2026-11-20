@@ -87,7 +87,7 @@ Guárdalas con estos nombres y aparecen solas. Mientras falte una, la página mu
 |---|---|
 | `territory.mp3` | Territory — Sepultura |
 | `hasta-que-me-olvides.mp3` | Hasta que me olvides — Luis Miguel |
-| `pestes-mutantex.mp3` | Canción de Pestes Mutantex |
+| `sin-reaccion-mutantex.mp3` | Sin reacción — Pestes Mutantex |
 
 Puede ser la canción completa: solo suenan unos segundos. En `contenido.js`, `inicio` es el segundo donde empieza el clip y `duracion` cuántos segundos suena. Si falta un archivo, el botón muestra "Falta public/audio/…".
 

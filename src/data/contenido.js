@@ -42,10 +42,9 @@ export const canciones = [
   { titulo: 'Hasta que me olvides', artista: 'Luis Miguel', genero: 'Para planchar', modo: 'planchar', audio: 'audio/hasta-que-me-olvides.mp3', inicio: 0, duracion: 15 },
 ];
 
-// ✏️ Escribe el nombre de la canción de Pestes Mutantex que vas a poner.
 export const cancionPunk = {
-  titulo: 'Nombre de la canción', artista: 'Pestes Mutantex', genero: 'Punk', modo: 'punk',
-  audio: 'audio/pestes-mutantex.mp3', inicio: 0, duracion: 15,
+  titulo: 'Sin reacción', artista: 'Pestes Mutantex', genero: 'Punk', modo: 'punk',
+  audio: 'audio/sin-reaccion-mutantex.mp3', inicio: 0, duracion: 15,
 };
 
 // Sección de astronomía: un sistema solar con lo que más quiero.
