@@ -2,6 +2,7 @@ import { section } from '../components/section.js';
 import { photo } from '../components/photo.js';
 import { track } from '../components/track.js';
 import { fotos, bandas, canciones } from '../data/contenido.js';
+import { stop as stopClip } from '../core/audioClips.js';
 import './musica.css';
 
 const id = 'musica';
@@ -42,7 +43,7 @@ export default {
           </div>
         </div>
         ${canciones.map(track).join('')}
-        <p class="small muted">Unos segundos de cada una.</p>
+        <p class="small muted">Unos segundos de la canción.</p>
       </div>
     </div>`),
 
@@ -55,12 +56,16 @@ export default {
       eq.append(bar);
     }
 
+    // el interruptor decide qué canción se ve (musica.css): Metal → Sepultura, Para planchar → Luis Miguel
     const toggle = el.querySelector('#modeToggle');
     const setMode = on => {
       el.classList.toggle('planchar', on);
       toggle.setAttribute('aria-checked', on);
     };
-    toggle.addEventListener('click', () => setMode(!el.classList.contains('planchar')));
+    toggle.addEventListener('click', () => {
+      stopClip();
+      setMode(!el.classList.contains('planchar'));
+    });
     // al sonar una canción, la sección cambia a su estilo
     el.addEventListener('clip:play', e => setMode(e.detail.mode === 'planchar'));
   },

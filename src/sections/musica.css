@@ -6,6 +6,11 @@
 .musica.planchar .only-planchar { display: inline; }
 .musica.planchar .marquee-track.only-planchar { display: inline-flex; }
 
+/* solo se ve la canción del modo elegido */
+.musica .track[data-mode="planchar"],
+.musica.planchar .track[data-mode="metal"] { display: none; }
+.musica.planchar .track[data-mode="planchar"] { display: flex; }
+
 .fire {
   background: linear-gradient(90deg, #ff2e3f, #ff6a3d 50%, #ffb020);
   -webkit-background-clip: text; background-clip: text; color: transparent;
