@@ -78,7 +78,7 @@ Guárdalas con estos nombres y aparecen solas. Mientras falte una, la página mu
 | `perro-2.jpg` | Mi manada | Vertical 3:4 |
 | `gato.jpg` | Mi manada | Vertical 3:4 |
 | `yo-ikea.jpg` | IKEA, mi escuela | Horizontal o cuadrada |
-| `amigos.jpg` | Tiempo libre | Horizontal 4:3 |
+| `tiempo-1.jpg` … `tiempo-4.jpg` | Tiempo libre · galería "Pasar tiempo" (pon las que quieras en `fotos.tiempo`) | Horizontal 4:3 |
 
 ### Video → `public/video/`
 
@@ -108,7 +108,7 @@ Puede ser la canción completa: solo suenan unos segundos. En `contenido.js`, `i
 4. **IKEA, mi escuela:** habilidades y carrera.
 5. **Dato curioso:** conciertos, metal y "música para planchar".
 6. **Punk.**
-7. **Tiempo libre:** amigos, karaoke y videojuegos.
+7. **Tiempo libre:** galería "Pasar tiempo", karaoke y videojuegos.
 8. **Astronomía:** sistema solar en 3D.
 9. **Trayectoria:** niveles LVL 1 → LVL 4 · boss (Líder).
 10. **Acciones** y **Reposición:** la app para la RP.

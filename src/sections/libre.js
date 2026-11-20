@@ -1,5 +1,5 @@
 import { section } from '../components/section.js';
-import { photo } from '../components/photo.js';
+import { gallery } from '../components/gallery.js';
 import { pixelArt, sprites, invader } from '../components/pixel.js';
 import { fotos } from '../data/contenido.js';
 import './libre.css';
@@ -32,8 +32,8 @@ export default {
       <h2 class="h-lg reveal">Lo que disfruto.</h2>
       <div class="grid cols-3" data-stagger>
         <article class="tile reveal" data-tilt="glare">
-          ${photo({ src: fotos.amigos, label: 'Tú con tus amigos' })}
-          <div class="tile-body"><h3>Mis amigos</h3><p>Los de siempre.</p></div>
+          ${gallery(fotos.tiempo, 'Pasar tiempo')}
+          <div class="tile-body"><h3>Pasar tiempo</h3><p>Con mis amigos, los de siempre.</p></div>
         </article>
         <article class="tile karaoke reveal" data-tilt="glare">
           ${mic}

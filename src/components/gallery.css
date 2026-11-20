@@ -1,0 +1,43 @@
+.gallery { position: relative; aspect-ratio: 4 / 3; overflow: hidden; }
+
+/* las fotos van una encima de otra; solo se ve (y se puede tocar) la activa */
+.gallery > .gal-item {
+  position: absolute; inset: 0;
+  border-radius: 0;
+  opacity: 0; visibility: hidden;
+  transition: opacity .9s var(--ease), visibility 0s .9s;
+}
+.gallery > .gal-item.on { opacity: 1; visibility: visible; transition: opacity .9s var(--ease); }
+/* acercamiento lento mientras se ve */
+.gallery > .gal-item.on img { animation: kenburns 7s ease-out forwards; }
+@keyframes kenburns { from { transform: scale(1); } to { transform: scale(1.08); } }
+
+.gal-btn {
+  position: absolute; top: 50%; z-index: 3;
+  width: 34px; height: 34px;
+  translate: 0 -50%;
+  display: grid; place-items: center;
+  border: 0;
+  background: rgba(13, 5, 7, .6); color: #fbefe9;
+  font: 10px/1 var(--pixel);
+  cursor: pointer;
+  opacity: 0; transition: opacity .25s, background .2s;
+}
+.gal-prev { left: 10px; }
+.gal-next { right: 10px; }
+.gallery:hover .gal-btn, .gal-btn:focus-visible { opacity: 1; }
+.gal-btn:hover { background: rgba(13, 5, 7, .85); }
+@media (hover: none) { .gal-btn { opacity: 1; } }
+
+/* puntos cuadrados, estilo pixel */
+.gal-dots {
+  position: absolute; left: 0; right: 0; bottom: 12px; z-index: 3;
+  display: flex; justify-content: center; gap: 6px;
+}
+.gal-dots button {
+  width: 8px; height: 8px; padding: 0; border: 0;
+  background: rgba(255, 255, 255, .45);
+  cursor: pointer;
+  transition: background .2s, transform .2s;
+}
+.gal-dots button.on { background: var(--red); transform: scale(1.25); }

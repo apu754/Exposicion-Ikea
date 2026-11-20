@@ -12,7 +12,13 @@ export const fotos = {
   principal: 'img/yo-principal.jpg',
   ikea: 'img/yo-ikea.jpg',
   concierto: 'video/concierto.mp4',   // video: va en public/video/
-  amigos: 'img/amigos.jpg',
+  // ✏️ Galería "Pasar tiempo": pon cuantas fotos quieras, en el orden en que deben pasar
+  tiempo: [
+    'img/tiempo-1.jpg',
+    'img/tiempo-2.jpg',
+    'img/tiempo-3.jpg',
+    'img/tiempo-4.jpg',
+  ],
 };
 
 // Las palabras entre [corchetes] se resaltan con el degradado.
