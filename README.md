@@ -161,6 +161,10 @@ Respeta la opción del sistema "reducir movimiento" y se adapta a celular, con m
 
 ---
 
+## Publicación
+
+La página está en Netlify conectada a este repositorio: cada `push` a `main` la compila (`netlify.toml`) y la publica sola.
+
 ## Nota sobre las canciones
 
-Los mp3 de `public/audio/` no vienen incluidos porque tienen derechos de autor. Son para uso personal en la exposición.
+Los mp3 de `public/audio/` tienen derechos de autor de sus artistas; se usan solo como parte de esta exposición.
