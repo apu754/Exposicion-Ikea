@@ -20,7 +20,7 @@ export default {
       <p class="eyebrow reveal">Dato curioso</p>
       <h2 class="h-xl reveal">Vivo para los<br><span class="fire">conciertos.</span></h2>
       <p class="lead reveal">
-        <span class="only-metal">El metal es lo mío.</span>
+        <span class="only-metal">Mi genero preferido es el metal</span>
         <span class="only-planchar">…y también, música para planchar.</span>
       </p>
       <div class="eq reveal" aria-hidden="true"></div>

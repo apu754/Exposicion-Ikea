@@ -71,9 +71,9 @@ export const trayectoria = [
   { ver: 'v1.0', titulo: 'Fines de semana', texto: 'Donde empezó todo.', estado: 'hecho' },
   { ver: 'v2.0', titulo: 'Medio tiempo', texto: 'Trabajo y estudio, en equilibrio.', estado: 'hecho' },
   { ver: 'v3.0', titulo: 'Planificador de cocinas', texto: 'El siguiente paso.', estado: 'siguiente' },
-  { ver: 'v4.0', titulo: 'Líder', texto: 'A donde quiero llegar.', estado: 'meta' },
+  { ver: 'v4.0', titulo: 'Líder', texto: '', estado: 'meta' },
 ];
-export const meta = 'llegar a ser líder en la empresa.';
+export const meta = 'llegar a ser líder';
 
 export const acciones = [
   { titulo: 'Acompañar cada temporada', texto: 'Junto a la empresa, mis líderes y mis compañeros, en todo el proceso.' },

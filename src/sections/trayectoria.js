@@ -22,6 +22,6 @@ export default {
       </ol>
 
       <p class="pixel next-level reveal">★ Next level</p>
-      <p class="meta-line reveal">Mi meta: <b class="grad">${meta}</b></p>
+      <p class="meta-line reveal">Mi meta dentro de la empresa: <b class="grad">${meta}</b></p>
     </div>`),
 };
