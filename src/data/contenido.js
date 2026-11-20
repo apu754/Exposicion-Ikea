@@ -9,26 +9,25 @@ export const perfil = {
 };
 
 export const fotos = {
-  principal: 'img/yo-principal.jpg',
-  ikea: 'img/yo-ikea.jpg',
+  principal: 'img/yo.jpeg',
+  ikea: 'img/yo-ikea.jpeg',
   concierto: 'video/concierto.mp4',   // video: va en public/video/
-  // ✏️ Galería "Pasar tiempo": pon cuantas fotos quieras, en el orden en que deben pasar
   tiempo: [
-    'img/tiempo-1.jpg',
-    'img/tiempo-2.jpg',
-    'img/tiempo-3.jpg',
-    'img/tiempo-4.jpg',
+    'img/amigos1.jpeg',
+    'img/amigos2.jpeg',
+    'img/amigos3.jpeg',
+    'img/amigos4.jpeg',
   ],
 };
 
 // Las palabras entre [corchetes] se resaltan con el degradado.
-export const frase = 'Lo más importante para mí son [mis mascotas,] [mis amigos] y mi gente.';
+export const frase = 'Lo más importante para mí son [mis mascotas,] [mis amigos]';
 
 // ✏️ Cambia "Nombre" por el nombre de cada uno.
 export const mascotas = [
-  { nombre: 'Nombre', tipo: 'Perro', foto: 'img/perro-1.jpg' },
-  { nombre: 'Nombre', tipo: 'Perro', foto: 'img/perro-2.jpg' },
-  { nombre: 'Nombre', tipo: 'Gato · el nuevo jefe', foto: 'img/gato.jpg', badge: '3 meses' },
+  { nombre: 'Denver', tipo: 'Perro', foto: 'img/denver.jpeg' },
+  { nombre: 'Polo', tipo: 'Perro', foto: 'img/polo.jpeg' },
+  { nombre: 'Ronnie', tipo: 'Gato', foto: ['img/ronnie.jpeg', 'img/momentos.jpeg']},
 ];
 
 export const habilidades = [
@@ -44,13 +43,13 @@ export const bandas = {
 
 // inicio = segundo de la canción donde empieza el clip · duracion = cuántos segundos suena
 export const canciones = [
-  { titulo: 'Territory', artista: 'Sepultura', genero: 'Metal', modo: 'metal', audio: 'audio/territory.mp3', inicio: 0, duracion: 15 },
+  { titulo: 'Territory', artista: 'Sepultura', genero: 'Metal', modo: 'metal', audio: 'audio/territory.mp3', inicio: 50, duracion: 120 },
   { titulo: 'Hasta que me olvides', artista: 'Luis Miguel', genero: 'Para planchar', modo: 'planchar', audio: 'audio/hasta-que-me-olvides.mp3', inicio: 0, duracion: 15 },
 ];
 
 export const cancionPunk = {
   titulo: 'Sin reacción', artista: 'Pestes Mutantex', genero: 'Punk', modo: 'punk',
-  audio: 'audio/sin-reaccion-mutantex.mp3', inicio: 0, duracion: 15,
+  audio: 'audio/sin-reaccion-mutantex.mp3', inicio: 0, duracion: 60,
 };
 
 // Sección de astronomía: un sistema solar con lo que más quiero.

@@ -1,5 +1,7 @@
 .pets { grid-template-columns: repeat(3, 1fr); }
 .pet .photo { aspect-ratio: 3 / 4; }
+/* si una mascota tiene varias fotos, la galería toma la misma forma que las demás */
+.pet .gallery { aspect-ratio: 3 / 4; border-radius: var(--radius); background: var(--photo-bg); }
 .pet:hover .photo img { transform: scale(1.05); }
 .pet figcaption { display: flex; flex-direction: column; margin-top: 14px; }
 .pet b { font-size: 22px; letter-spacing: -.02em; }
@@ -8,5 +10,6 @@
 @media (max-width: 640px) {
   .pets { grid-template-columns: 1fr 1fr; }
   .pet:last-child { grid-column: span 2; }
-  .pet:last-child .photo { aspect-ratio: 4 / 3; }
+  .pet:last-child .photo,
+  .pet:last-child .gallery { aspect-ratio: 4 / 3; }
 }
