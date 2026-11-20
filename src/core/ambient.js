@@ -43,7 +43,7 @@ export function initAmbient() {
 
   document.addEventListener('clip:play', () => { ducked = true; update(); });
   document.addEventListener('clip:stop', () => { ducked = false; update(); });
-  document.addEventListener('blackhole:swallow', rumble);
+  document.addEventListener('blackhole:swallow', e => rumble(e.detail?.strength, e.detail?.length));
   onVolume(update);
 }
 
@@ -182,35 +182,36 @@ function pad(notes, t, len) {
   });
 }
 
-// estruendo grave cuando el agujero negro se traga la página
-function rumble() {
+// Estruendo grave del agujero negro. `strength` = qué tan fuerte (1 en la portada),
+// `length` = cuántos segundos dura.
+function rumble(strength = 1, length = 2.4) {
   if (!ctx) build();
   ctx.resume();
   update();
   const t = ctx.currentTime;
   const env = ctx.createGain();
   env.gain.setValueAtTime(0.0001, t);
-  env.gain.exponentialRampToValueAtTime(0.6, t + 1.2);
-  env.gain.exponentialRampToValueAtTime(0.0001, t + 2.4);
+  env.gain.exponentialRampToValueAtTime(0.6 * strength, t + length * 0.5);
+  env.gain.exponentialRampToValueAtTime(0.0001, t + length);
   env.connect(sfx);
 
   const o = ctx.createOscillator();
   o.frequency.setValueAtTime(90, t);
-  o.frequency.exponentialRampToValueAtTime(28, t + 2);
+  o.frequency.exponentialRampToValueAtTime(28, t + length * 0.83);
   o.connect(env);
 
   const noise = ctx.createBufferSource();
-  noise.buffer = noiseBuffer(2.5);
+  noise.buffer = noiseBuffer(length + 0.1);
   const lp = ctx.createBiquadFilter();
   lp.type = 'lowpass';
   lp.frequency.setValueAtTime(900, t);
-  lp.frequency.exponentialRampToValueAtTime(60, t + 2);
+  lp.frequency.exponentialRampToValueAtTime(60, t + length * 0.83);
   const ng = ctx.createGain();
   ng.gain.value = 0.5;
   noise.connect(lp).connect(ng).connect(env);
 
-  o.start(t); o.stop(t + 2.5);
-  noise.start(t); noise.stop(t + 2.5);
+  o.start(t); o.stop(t + length + 0.1);
+  noise.start(t); noise.stop(t + length + 0.1);
 }
 
 function noiseBuffer(seconds) {

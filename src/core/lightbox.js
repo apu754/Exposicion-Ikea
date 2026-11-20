@@ -37,6 +37,8 @@ export function initLightbox(root) {
 async function show(ph) {
   if (open || busy) return;
   busy = true;
+  // el mismo sonido del agujero negro de la portada, más suave y corto
+  ph.dispatchEvent(new CustomEvent('blackhole:swallow', { bubbles: true, detail: { strength: 0.35, length: 1.6 } }));
 
   const r = ph.getBoundingClientRect();
   const cx = r.left + r.width / 2;
