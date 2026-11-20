@@ -11,12 +11,14 @@ export const perfil = {
 export const fotos = {
   principal: 'img/yo.jpeg',
   ikea: 'img/yo-ikea.jpeg',
-  concierto: 'video/concierto.mp4',   // video: va en public/video/
+  concierto: 'video/concierto.mp4',  
+  concierto2: 'video/concierto2.mp4', 
   tiempo: [
     'img/amigos1.jpeg',
     'img/amigos2.jpeg',
     'img/amigos3.jpeg',
     'img/amigos4.jpeg',
+    'img/familia.jpeg'
   ],
 };
 
@@ -25,9 +27,9 @@ export const frase = 'Lo más importante para mí son [mis mascotas,] [mis amigo
 
 // ✏️ Cambia "Nombre" por el nombre de cada uno.
 export const mascotas = [
-  { nombre: 'Denver', tipo: 'Perro', foto: 'img/denver.jpeg' },
+  { nombre: 'Denver', tipo: 'Perro', foto: ['img/denver.jpeg', 'img/denver2.jpeg','img/denver3.jpeg', 'img/denver4.jpeg'] },
   { nombre: 'Polo', tipo: 'Perro', foto: 'img/polo.jpeg' },
-  { nombre: 'Ronnie', tipo: 'Gato', foto: ['img/ronnie.jpeg', 'img/momentos.jpeg']},
+  { nombre: 'Ronnie', tipo: 'Gato', foto: ['img/ronnie.jpeg', 'img/momentos.jpeg','img/ronnie3.jpeg']},
 ];
 
 export const habilidades = [

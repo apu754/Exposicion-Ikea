@@ -32,7 +32,10 @@ export default {
     </div>
 
     <div class="wrap musica-bottom">
-      <div class="reveal">${video({ src: fotos.concierto, label: 'Tú en un concierto' })}</div>
+      <div class="reveal videos">
+        ${video({ src: fotos.concierto, label: 'Tú en un concierto' })}
+        ${video({ src: fotos.concierto2, label: 'Otro concierto' })}
+      </div>
       <div class="playlist reveal" style="--d:.15s">
         <div class="playlist-head">
           <h3>Suena así</h3>
